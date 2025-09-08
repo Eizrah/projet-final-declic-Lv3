@@ -1,11 +1,8 @@
-// Payement.dart
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/foundation.dart'; // Import pour kDebugMode
 
-// --- Sécurité Améliorée ---
-// TODO: NE JAMAIS stocker les identifiants en clair dans le code.
+//NE JAMAIS stocker les identifiants en clair dans le code.
 // Utilisez des variables d'environnement pour plus de sécurité.
 const String cliid = "AbTFQpZlme5A6-PZYhMsnqtqZD0d2JtDYaTkQuZkC25mXKVxEiFqgT_TRJGn2fo614KYTSQfyMcJfaP7";
 const String sct = "EOEc21HpVE_cZzazLbvZkjHJbw9QadEijdGmw5SOmV68sVvwU92c6otYG4e2cX3qZ5_7I7j4POGuohf2";
@@ -15,7 +12,7 @@ class PayPalService {
   final String secret;
   final String baseUrl = "https://api-m.sandbox.paypal.com"; // URL pour le mode test
 
-  // --- Constructeur ---
+  //Constructeur
   // Permet de fournir les identifiants lors de la création du service.
   PayPalService({required this.clientId, required this.secret});
 
@@ -36,7 +33,7 @@ class PayPalService {
         final data = jsonDecode(response.body);
         return data["access_token"];
       } else {
-        // --- Amélioration du log d'erreur ---
+        //Amélioration du log d'erreur
         // Affiche le statut et le corps de la réponse pour un débogage facile.
         if (kDebugMode) {
           print("Erreur d'obtention du token: ${response.statusCode}");
@@ -74,8 +71,8 @@ class PayPalService {
           "purchase_units": [
             {
               "amount": {
-                "currency_code": "USD", // Assurez-vous que c'est la bonne devise
-                // --- Correction Critique ---
+                "currency_code": "USD", // on s'assure que c'est la bonne devise
+                
                 // S'assure que le montant est toujours une chaîne avec deux décimales.
                 "value": amount.toStringAsFixed(2),
               },
@@ -108,7 +105,7 @@ class PayPalService {
         }
         return null; // Retourne null si le lien n'est pas trouvé
       } else {
-        // --- Amélioration du log d'erreur ---
+        //Amélioration du log d'erreur
         if (kDebugMode) {
           print("Erreur lors de la création de la commande: ${response.statusCode}");
           print("Réponse de l'API: ${response.body}");

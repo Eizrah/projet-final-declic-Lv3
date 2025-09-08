@@ -19,7 +19,7 @@ class Article {
     this.isFavorite = false,
   }) : idArticle = _uuid.v4();
 
-  // Constructeur avec id (utile quand l'id vient de Firestore ou d’un JSON)
+  // Constructeur avec id utile quand l'id vient de Firestore ou d’un JSON
   Article.avecId({
     required this.idArticle,
     required this.nom,
@@ -41,7 +41,7 @@ class Article {
     };
   }
 
-  // Création depuis JSON (utile si tu stockes ton article en local ou REST API)
+  // Création depuis JSON (utile si on stockes l' article en local ou REST API)
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article.avecId(
       idArticle: json['idArticle'],
@@ -53,7 +53,7 @@ class Article {
     );
   }
 
-  // ✅ Création depuis Map Firestore (doc.data())
+  // Création depuis Map Firestore (doc.data())
   factory Article.fromMap(Map<String, dynamic> map) {
     return Article.avecId(
       idArticle: map['idArticle'] ?? _uuid.v4(), // si pas d’id en base → on en génère un

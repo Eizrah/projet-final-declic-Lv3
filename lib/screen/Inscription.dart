@@ -110,7 +110,7 @@ Future<void> _signInWithGoogle() async {
 
     UserCredential userCred = await _auth.signInWithCredential(credential);
 
-    // 🔹 Vérifie si c’est un nouvel utilisateur
+    //Vérifie si c’est un nouvel utilisateur
     if (userCred.additionalUserInfo!.isNewUser) {
       await _firestore.collection("User").doc(userCred.user!.uid).set({
         "id_user": userCred.user!.uid,
@@ -127,7 +127,7 @@ Future<void> _signInWithGoogle() async {
       const SnackBar(content: Text("Connexion Google réussie ✅")),
     );
 
-    // 🔹 Redirection vers Home
+    //Redirection vers Home
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const Homea()),

@@ -1,4 +1,3 @@
-// dans le fichier Profil.dart
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,7 +56,7 @@ class _InterfaceProf extends State<InterfaceProf> {
   Future<void> _loadUserData() async {
     final User? authUser = _auth.currentUser;
     if (authUser != null) {
-      // 1. Récupérer les données de l'utilisateur depuis Firebase
+      // Récupérer les données de l'utilisateur depuis Firebase
       final doc = await _firestore.collection('User').doc(authUser.uid).get();
       if (doc.exists) {
         final data = doc.data() as Map<String, dynamic>;
@@ -66,7 +65,7 @@ class _InterfaceProf extends State<InterfaceProf> {
         _emailController.text = data['email'] ?? '';
       }
 
-      // 2. Récupérer l'URL de la photo depuis SQFlite
+      //  Récupérer l'URL de la photo depuis SQFlite
       _photoUrlLocal = await DatabaseManager.getUserPhotoUrl(authUser.uid);
 
       setState(() {
@@ -83,13 +82,13 @@ class _InterfaceProf extends State<InterfaceProf> {
     final pickedFile = await picker.pickImage(source: ImageSource.camera, imageQuality: 70);
 
     if (pickedFile != null) {
-      // 1. Sauvegarder la photo en local
+      // Sauvegarder la photo en local
       final appDir = await getApplicationDocumentsDirectory();
       final fileName = p.basename(pickedFile.path);
       final newPath = p.join(appDir.path, '${authUser.uid}_$fileName');
       final savedImage = await File(pickedFile.path).copy(newPath);
 
-      // 2. Créer un objet User pour l'insertion SQFlite
+      // Créer un objet User pour l'insertion SQFlite
       final userWithPhoto = MonUtilisateur.User.withId(
         idUser: authUser.uid,
         nom: _nom.text,
@@ -101,10 +100,10 @@ class _InterfaceProf extends State<InterfaceProf> {
         photoUrl: savedImage.path,
       );
 
-      // 3. Sauvegarder le chemin dans SQFlite
+      //Sauvegarder le chemin dans SQFlite
       await DatabaseManager.insertOrUpdateUserPhoto(userWithPhoto);
 
-      // 4. Mettre à jour l'état de l'UI
+      //Mettre à jour l'état de l'UI
       setState(() {
         _imageFile = savedImage;
         _photoUrlLocal = savedImage.path;
@@ -116,8 +115,6 @@ class _InterfaceProf extends State<InterfaceProf> {
     }
   }
 
-  //... le reste de la classe _InterfaceProf
-  // _updateUserData() et _signOut() restent inchangées
 
   @override
   Widget build(BuildContext context) {

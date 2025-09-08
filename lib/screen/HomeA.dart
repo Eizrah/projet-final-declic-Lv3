@@ -22,7 +22,7 @@ class _HomeaState extends State<Homea> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _search = TextEditingController();
 
-  String _searchQuery = ''; // 👈 Variable d'état pour la recherche
+  String _searchQuery = ''; //Variable d'état pour la recherche
 
   int _currentIndex = 0;
 
@@ -244,17 +244,20 @@ class _HomeaState extends State<Homea> {
                                 borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(12),
                                 ),
-                                child: article.image.startsWith("http")
-                                    ? Image.network(
-                                        article.image,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Image.asset(
-                                        article.image,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                      ),
+                                child: Hero(
+                                  tag: article.idArticle,
+                                  child: article.image.startsWith("http")
+                                      ? Image.network(
+                                          article.image,
+                                          height: 120,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          article.image,
+                                          height: 120,
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8),

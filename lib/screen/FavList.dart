@@ -181,27 +181,30 @@ class _FavlistState extends State<Favlist> {
                                 borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(12),
                                 ),
-                                child: article.image.startsWith("http")
-                                    ? Image.network(
-                                        article.image,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Image.asset(
-                                        article.image,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                              return Container(
-                                                height: 120,
-                                                color: Colors.grey,
-                                                child: const Icon(
-                                                  Icons.image_not_supported,
-                                                ),
-                                              );
-                                            },
-                                      ),
+                                child: Hero(
+                                  tag: article.idArticle, // Ajout de l'animation Hero
+                                  child: article.image.startsWith("http")
+                                      ? Image.network(
+                                          article.image,
+                                          height: 120,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          article.image,
+                                          height: 120,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                                return Container(
+                                                  height: 120,
+                                                  color: Colors.grey,
+                                                  child: const Icon(
+                                                    Icons.image_not_supported,
+                                                  ),
+                                                );
+                                              },
+                                        ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8),

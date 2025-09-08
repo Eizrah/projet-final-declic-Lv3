@@ -1,4 +1,3 @@
-// dans le fichier User.dart
 import 'package:uuid/uuid.dart';
 
 class User {
@@ -7,7 +6,7 @@ class User {
   String prenom;
   String email;
   String mdp;
-  String? photoUrl; // 👈 Nouvelle propriété
+  String? photoUrl; // Nouvelle propriété
   List<String> favoris;
   List<String> panier;
 
@@ -16,7 +15,7 @@ class User {
     required this.prenom,
     required this.email,
     required this.mdp,
-    this.photoUrl, // 👈 Mis à jour
+    this.photoUrl, // Mis à jour
     List<String>? favoris,
     List<String>? panier,
   })  : idUser = Uuid().v4(),
@@ -31,11 +30,11 @@ class User {
     required this.mdp,
     required this.favoris,
     required this.panier,
-    this.photoUrl, // 👈 Mis à jour
+    this.photoUrl, // Mis à jour
   });
 
 
-//utilse pour sqflite
+//utilser pour sqflite
   Map<String, dynamic> toMap() {
     return {
       'idUser': idUser,
@@ -50,7 +49,7 @@ class User {
       'prenom': prenom,
       'email': email,
       'mdp': mdp,
-      'photoUrl': photoUrl, // 👈 Mis à jour
+      'photoUrl': photoUrl, // Mis à jour
       'favoris': favoris,
       'panier': panier,
     };
@@ -65,7 +64,7 @@ class User {
       mdp: json['mdp'],
       favoris: List<String>.from(json['favoris'] ?? []),
       panier: List<String>.from(json['panier'] ?? []),
-      photoUrl: json['photoUrl'], // 👈 Mis à jour
+      photoUrl: json['photoUrl'], // Mis à jour
     );
   }
 
@@ -77,7 +76,7 @@ class User {
     String? mdp,
     List<String>? favoris,
     List<String>? panier,
-    String? photoUrl, // 👈 Mis à jour
+    String? photoUrl, //Mis à jour
   }) {
     return User.withId(
       idUser: idUser ?? this.idUser,
@@ -87,7 +86,7 @@ class User {
       mdp: mdp ?? this.mdp,
       favoris: favoris ?? this.favoris,
       panier: panier ?? this.panier,
-      photoUrl: photoUrl ?? this.photoUrl, // 👈 Mis à jour
+      photoUrl: photoUrl ?? this.photoUrl, //Mis à jour
     );
   }
 
